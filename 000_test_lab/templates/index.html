@@ -136,17 +136,22 @@
           function table_gen(){
             const el_table = document.getElementsByClassName("checks");
             var count_table = 0;
+            var checked_values = [];
             for(var i=0; i<el_table.length; i++){
               if(el_table[i].checked == true){
+                console.log(el_table[i].value);//チェックされたcheckboxのvalueを表示(2020-11-18)
+                checked_values.push(el_table[i].value);
                 count_table++;
               }
             }
-            if(count_table != 0){
-              console.log("ここでAjaxでデータベースにデータ要求、受け取ったjsonから<table>を生成");
-              var json_value = JSON.stringify({"select_db":$('#select_db_id').val(),"select_table":$('#select_table_id').val(),"check_001":document.getElementsByName("check_001").values()});
-              console.log(json_value);
-            }else{
+            if(count_table == 0){
               console.log("ここでは空の<table>を生成")
+            }else{
+              console.log("ここでAjaxでデータベースにデータ要求、受け取ったjsonから<table>を生成");
+              //ここにcheckが入ってる値の配列を用意しておくfor文を記述
+              console.log("これがchecksリスト"+checked_values);
+              var json_value = JSON.stringify({"select_db":$('#select_db_id').val(),"select_table":$('#select_table_id').val(),"check_001":checked_values});
+              console.log(json_value);
             }
           }
         </script>
