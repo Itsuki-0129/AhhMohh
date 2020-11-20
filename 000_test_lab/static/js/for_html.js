@@ -27,7 +27,7 @@ function ajax_db(){
           contentType: 'application/json',
           success:
               function (data){
-                  console.log(data);
+                  console.log("ajax_db()のdataまるごと→"+data);
                   $('#select_table_id').children().remove();
                   var arr = data;
                   if(arr.length<1){
@@ -152,18 +152,24 @@ function table_gen(){
         function (data){
           console.log("dataをまるごと表示→"+data);
           var place_div = document.getElementById("create_table");
-          var place_div = document.getElementById("create_table");
           var create_table = document.createElement("table");
           var create_tablebody = document.createElement("tbody");
           create_table.className = "zebra";
           console.log(Object.keys(data).length);//データの行数をログ表示
           var row_num = Object.keys(data).length;
+          //ここからは、jsonのkey集め
+          var key_list=[];
+          for(result_key in data[0]){
+            key_list.push(result_key);
+          }
+          console.log("key_listは"+key_list);
+          //ここまで
           console.log("Object.keys(data).lengthは"+Object.keys(data).length);//ただの確認用
           for(var i=0; i<row_num; i++){
             var row = document.createElement("tr");
             for(var j=0; j<count_table; j++){
               var cell = document.createElement("td");
-              var key_text = data[i];//わからん！！！！！！ここがダメなのはわかる
+              var key_text = i+"-"+j+key_list[j];//わからん！！！！！！ここがダメなのはわかる
               var cellText = document.createTextNode(key_text);
               cell.appendChild(cellText);
               row.appendChild(cell);

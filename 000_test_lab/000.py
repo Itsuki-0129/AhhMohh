@@ -86,6 +86,8 @@ def ajax_002():
     for h in column_list:
         json_for_checkbox.append({"columns": h})
 
+    print("/ajax_tableのjsonifyの値は、"+str(json_for_checkbox))
+
     return jsonify(json_for_checkbox)
 
 
