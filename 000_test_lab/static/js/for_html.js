@@ -152,6 +152,7 @@ function table_gen(){
       contentType: 'application/json',
       success:
         function (data){
+          $("#create_table").children().remove(); 
           console.log("dataをまるごと表示→"+data);
           var place_div = document.getElementById("create_table");//table生成予定の親要素取得
           var create_table = document.createElement("table");//<table>を生成する

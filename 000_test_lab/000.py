@@ -6,7 +6,6 @@ app = Flask(__name__)
 table_list = []
 column_list = []
 
-
 def dblist():
     conn = pymysql.connect(
         host='localhost',
@@ -16,7 +15,6 @@ def dblist():
         charset='utf8',
         cursorclass=pymysql.cursors.DictCursor
     )
-
     try:
         with conn.cursor() as cursor:
             sql = "show databases;"
@@ -24,13 +22,10 @@ def dblist():
             result = cursor.fetchall()
     finally:
         conn.close()
-
     db_list = []
     for i in result:
         db_list.append(i["Database"])
-
     return db_list
-
 
 def db_access(db_name, sql_query):
     conn = pymysql.connect(host='localhost',
@@ -40,32 +35,19 @@ def db_access(db_name, sql_query):
                            charset='utf8',
                            cursorclass=pymysql.cursors.DictCursor
                            )
-
     try:
         with conn.cursor() as cursor:
             sql = "%s" % (sql_query)
             cursor.execute(sql)
             result = cursor.fetchall()
-
     finally:
         conn.close()
-
     return result
-
 
 @app.route('/', methods=["GET", "POST"])
 def first():
     db_result = dblist()
     return render_template("index.html", db_list=db_result)
-
-@app.route('/hello', methods=["GET", "POST"])
-def jdklasjfs():
-    return render_template("hello.html")
-
-@app.route('/cmon', methods=["GET", "POST"])
-def jdklasssssjfs():
-    return "cmooooon"
-
 
 @app.route('/ajax_db', methods=["GET", "POST"])
 def ajax_001():
@@ -81,7 +63,6 @@ def ajax_001():
 
     return jsonify(json_for_js)
 
-
 @app.route('/ajax_table', methods=["GET", "POST"])
 def ajax_002():
     selected_db = request.json['select_db']
@@ -93,11 +74,8 @@ def ajax_002():
     json_for_checkbox = []
     for h in column_list:
         json_for_checkbox.append({"columns": h})
-
     print("/ajax_tableのjsonifyの値は、"+str(json_for_checkbox))
-
     return jsonify(json_for_checkbox)
-
 
 @app.route('/ajax_column', methods=["GET", "POST"])
 def ajax_003():
@@ -109,7 +87,6 @@ def ajax_003():
     db_result = db_access(selected_db, sql_query)
     print("db_resultをまるごと表示→"+str(db_result))
     return jsonify(db_result)
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5500, debug=True)
