@@ -1,6 +1,7 @@
-var number = 0;
+
 function text001(){
   //とりあえず<div id="create_js">の中にHelloのテキストが入った<div>を生成するやつ
+  var number = 0;
   number++;
   if(number >= 2){
     //document.getElementById("num_div").parentNode.removeChild(document.getElementById("num_div"));
@@ -63,19 +64,20 @@ function ajax_table(){
           function (data){
                 console.log(data);
                   $('#check_column_id').children().remove();
+                  $('#all_check_column').children().remove();
                   var arr1 = data;
 
                   var AllCheckLabel = document.createElement("label");
                   /*全選択option*/
                   AllCheckLabel.className = 'label_ui';
                   AllCheckLabel.setAttribute("for", "check_id_0");
-                  document.getElementById("check_column_id").appendChild(AllCheckLabel);
+                  document.getElementById("all_check_column").appendChild(AllCheckLabel);
                   let inp000 = document.createElement("input");
                   inp000.type = 'checkbox';
                   inp000.name = 'allchecked_box';
                   inp000.id = 'check_id_0';
-                  inp000.className = 'checks';
-                  inp000.value = '*';
+                  inp000.className = 'all_check';
+                  inp000.value = "*";
                   inp000.setAttribute('onclick', 'AllChecked()');//←イベントハンドラ追加できたよ！[2020/09/17]
                   AllCheckLabel.appendChild(inp000);
                   AllCheckLabel.innerHTML = AllCheckLabel.innerHTML + "全選択" + "<br>";
@@ -151,25 +153,34 @@ function table_gen(){
       success:
         function (data){
           console.log("dataをまるごと表示→"+data);
-          var place_div = document.getElementById("create_table");
-          var create_table = document.createElement("table");
-          var create_tablebody = document.createElement("tbody");
+          var place_div = document.getElementById("create_table");//table生成予定の親要素取得
+          var create_table = document.createElement("table");//<table>を生成する
+          var create_tablehead = document.createElement("thead");//<thead>を生成する
+          var create_tablebody = document.createElement("tbody");//<tbody>を生成する
           create_table.className = "zebra";
-          console.log(Object.keys(data).length);//データの行数をログ表示
+          console.log("Object.keys(data).lengthは→"+Object.keys(data).length);//データの行数をログ表示
           var row_num = Object.keys(data).length;
-          //ここからは、jsonのkey集め
-          var key_list=[];
-          for(result_key in data[0]){
-            key_list.push(result_key);
+          //↓ここから<thead>見出しを生成
+          var row = document.createElement("tr");
+          for(var j=0; j<count_table; j++){
+            var cell = document.createElement("th");
+            var key_text = checked_values[j];
+            var cellText = document.createTextNode(key_text);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            create_tablehead.appendChild(row);
           }
-          console.log("key_listは"+key_list);
-          //ここまで
-          console.log("Object.keys(data).lengthは"+Object.keys(data).length);//ただの確認用
+          //↑ここまで
+          create_table.appendChild(create_tablehead);
+          place_div.appendChild(create_table);
           for(var i=0; i<row_num; i++){
             var row = document.createElement("tr");
             for(var j=0; j<count_table; j++){
               var cell = document.createElement("td");
-              var key_text = i+"-"+j+key_list[j];//わからん！！！！！！ここがダメなのはわかる
+              //↓これは[行番号-列番号で表示]
+              //var key_text = "["+i+"-"+j+"]"+data[i][checked_values[j]];
+              //↓これはdataのi行目のjsonからvalueを取り出すため、.テーブル名で参照
+              var key_text = data[i][checked_values[j]];
               var cellText = document.createTextNode(key_text);
               cell.appendChild(cellText);
               row.appendChild(cell);
@@ -180,6 +191,6 @@ function table_gen(){
           place_div.appendChild(create_table);
         }
     })
-    console.log(all_json);
   }
 }
+

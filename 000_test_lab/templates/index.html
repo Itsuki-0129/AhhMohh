@@ -21,6 +21,7 @@
           <select class="soft_ui" name="select_table" id="select_table_id" onchange="ajax_table()">
             <option value=""hidden>テーブルを選択</option>
           </select>
+          <div id="all_check_column" onchange="CheckedCounter(); table_gen();"></div>
           <div id="check_column_id" onchange="CheckedCounter(); table_gen();">
           </div>
           <input type="text" class="text_001" name="text_001" value="text_001" oninput="text001()" autocomplete="off">
@@ -35,5 +36,6 @@
         <div id="checked_count"></div>
         <div id="create_table"></div>
       </div>
+      <a href="/hello">へっぉ</a>
     </body>
 </html>

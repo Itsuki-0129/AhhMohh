@@ -58,6 +58,14 @@ def first():
     db_result = dblist()
     return render_template("index.html", db_list=db_result)
 
+@app.route('/hello', methods=["GET", "POST"])
+def jdklasjfs():
+    return render_template("hello.html")
+
+@app.route('/cmon', methods=["GET", "POST"])
+def jdklasssssjfs():
+    return "cmooooon"
+
 
 @app.route('/ajax_db', methods=["GET", "POST"])
 def ajax_001():
