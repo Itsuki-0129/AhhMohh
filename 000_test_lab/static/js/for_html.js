@@ -1,7 +1,6 @@
-
+var number = 0;
 function text001(){
   //とりあえず<div id="create_js">の中にHelloのテキストが入った<div>を生成するやつ
-  var number = 0;
   number++;
   if(number >= 2){
     //document.getElementById("num_div").parentNode.removeChild(document.getElementById("num_div"));
@@ -144,7 +143,7 @@ function table_gen(){
     console.log("ここでAjaxでデータベースにデータ要求、受け取ったjsonから<table>を生成");
     //ここにcheckが入ってる値の配列を用意しておくfor文を記述
     console.log("これがchecksリスト"+checked_values);
-    var all_json = JSON.stringify({"select_db":$('#select_db_id').val(),"select_table":$('#select_table_id').val(),"check_001":checked_values});
+    var all_json = JSON.stringify({"select_db":$('#select_db_id').val(),"select_table":$('#select_table_id').val(),"check_001":checked_values,"text_001":$('#text_001_id').val()});
     $.ajax({
       type: 'POST',
       url: '/ajax_column',
@@ -181,7 +180,7 @@ function table_gen(){
               //↓これは[行番号-列番号で表示]
               //var key_text = "["+i+"-"+j+"]"+data[i][checked_values[j]];
               //↓これはdataのi行目のjsonからvalueを取り出すため、.テーブル名で参照
-              var key_text = data[i][checked_values[j]];
+              var key_text = data[i][checked_values[j]];//少しだけ理解した
               var cellText = document.createTextNode(key_text);
               cell.appendChild(cellText);
               row.appendChild(cell);

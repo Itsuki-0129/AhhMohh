@@ -21,9 +21,52 @@ table.zebra tr{
 }
 
 table.zebra tr:nth-child(odd){
-    background-color: #b7dfff;
+    background-color: #e2f2ff;
 }
 
 table.zebra tr:nth-child(even){
-    background-color: hsl(200, 100%, 97%);
+    background-color: #fefeff;
+}
+
+.soft_ui{
+    outline: none;
+    color: black;
+    margin: 10px;
+    padding: 5px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 5px 5px 10px #888;
+}
+
+.text_001{
+    outline: none;
+    color: black;
+    margin: 10px;
+    padding: 5px 30px;
+    height: 40px;
+    width: 250px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 5px 5px 10px #888;
+}
+
+.submit_button{
+    color: white;
+    background-color: #fe005d;
+    outline: none;
+    border: none;
+    padding: 5px 30px;
+    height: 50px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 10px #888;
+}
+
+.submit_button:hover{
+    transition: all 0.5s ease;
+     background-color: #d8004f;
+}
+
+.submit_button:active{
+    box-shadow: inset 5px 5px 10px #860031;
 }

@@ -82,8 +82,9 @@ def ajax_003():
     selected_db = request.json['select_db']
     selected_table = request.json['select_table']
     selected_columns = request.json['check_001']
-    sql_query = "select "+", ".join(str(e) for e in selected_columns)+" from "+str(selected_table)+";"
-    print(sql_query)
+    test_search_word = request.json['text_001']
+    sql_query = "select "+", ".join(str(e) for e in selected_columns)+" from "+str(selected_table)+" where "+" or ".join(str(e)+" like '%"+test_search_word+"%'" for e in selected_columns)+";"
+    print("●クエリはこちら→"+"("+sql_query+")")
     db_result = db_access(selected_db, sql_query)
     print("db_resultをまるごと表示→"+str(db_result))
     return jsonify(db_result)
