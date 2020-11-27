@@ -21,19 +21,19 @@
           <select class="soft_ui" name="select_table" id="select_table_id" onchange="ajax_table()">
             <option value=""hidden>テーブルを選択</option>
           </select>
-          <div id="all_check_column" onchange="CheckedCounter(); table_gen();"></div>
-          <div id="check_column_id" onchange="CheckedCounter(); table_gen();">
+          <div id="all_check_column" onchange="table_gen()"></div>
+          <div id="check_column_id" onchange="table_gen()">
           </div>
-          <input type="text" class="text_001" id="text_001_id" name="text_001" placeholder="text_001" oninput="text001(); table_gen()" autocomplete="off">
-          <input type="submit" class="submit_button" name="submit_button" value="無意味ボタン" onclick="submit001()">
+          <input type="text" class="text_001" id="text_001_id" name="text_001" placeholder="text_001" oninput="table_gen()" autocomplete="off">
+          <input type="button" class="submit_button" name="submit_button" value="無意味ボタン" onclick="table_gen()">
         </form>
         <br><br>
-        <h1>テーブル</h1>
+        <!--<h2>テーブル</h2>
         <div id="for_table"></div>
-        <h1>テキストボックス入力数</h1>
+        <h2>テキストボックス入力数</h2>
         <div id="create_js"></div>
-        <h1>チェック数</h1>
-        <div id="checked_count"></div>
+        <h2>チェック数</h2>
+        <div id="checked_count"></div>-->
         <div id="create_table"></div>
       </div>
     </body>

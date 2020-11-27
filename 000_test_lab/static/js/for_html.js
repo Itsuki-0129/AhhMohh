@@ -107,7 +107,7 @@ function AllChecked(){
       document.getElementById('form_001').check_001[i].checked = all;
   }
 }
-function CheckedCounter(){
+/*function CheckedCounter(){
   const el = document.getElementsByClassName("checks");
     var count = 0;
     for(var i=0; i<el.length; i++){
@@ -125,7 +125,7 @@ function CheckedCounter(){
     var str = document.createTextNode(count);
     cre.appendChild(str);
     document.getElementById("checked_count").appendChild(cre);
-}
+}*/
 function table_gen(){
   const el_table = document.getElementsByClassName("checks");
   var count_table = 0;
@@ -143,7 +143,11 @@ function table_gen(){
     console.log("ここでAjaxでデータベースにデータ要求、受け取ったjsonから<table>を生成");
     //ここにcheckが入ってる値の配列を用意しておくfor文を記述
     console.log("これがchecksリスト"+checked_values);
-    var all_json = JSON.stringify({"select_db":$('#select_db_id').val(),"select_table":$('#select_table_id').val(),"check_001":checked_values,"text_001":$('#text_001_id').val()});
+    var all_json = JSON.stringify
+    ({"select_db":$('#select_db_id').val(),
+    "select_table":$('#select_table_id').val(),
+    "check_001":checked_values,
+    "text_001":$('#text_001_id').val()});
     $.ajax({
       type: 'POST',
       url: '/ajax_column',

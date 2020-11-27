@@ -6,27 +6,6 @@ app = Flask(__name__)
 table_list = []
 column_list = []
 
-def dblist():
-    conn = pymysql.connect(
-        host='localhost',
-        user='ItsukiNagao',
-        passwd='nagaoitsuki',
-        db='006_regi_py',
-        charset='utf8',
-        cursorclass=pymysql.cursors.DictCursor
-    )
-    try:
-        with conn.cursor() as cursor:
-            sql = "show databases;"
-            cursor.execute(sql)
-            result = cursor.fetchall()
-    finally:
-        conn.close()
-    db_list = []
-    for i in result:
-        db_list.append(i["Database"])
-    return db_list
-
 def db_access(db_name, sql_query):
     conn = pymysql.connect(host='localhost',
                            user='ItsukiNagao',
@@ -46,8 +25,11 @@ def db_access(db_name, sql_query):
 
 @app.route('/', methods=["GET", "POST"])
 def first():
-    db_result = dblist()
-    return render_template("index.html", db_list=db_result)
+    db_result = db_access("", "show databases;")
+    db_list = []
+    for i in db_result:
+        db_list.append(i["Database"])
+    return render_template("index.html", db_list=db_list)
 
 @app.route('/ajax_db', methods=["GET", "POST"])
 def ajax_001():
